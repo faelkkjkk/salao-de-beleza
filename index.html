@@ -288,8 +288,22 @@
   <a class="wpp-float" href="https://wa.me/5571986477002?text=Oi!%20Vim%20pelo%20site%20%E2%9C%A8" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">💬</a>
 
   <script>
-    function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
-    function closeMenu() { document.getElementById('navLinks').classList.remove('open'); }
+    var navLinks = document.getElementById('navLinks');
+    var menuBtn = document.querySelector('.menu-btn');
+    function toggleMenu() { navLinks.classList.toggle('open'); }
+    function closeMenu() { navLinks.classList.remove('open'); }
+    // Fecha o menu ao clicar fora dele (e fora do botão que o abre)
+    document.addEventListener('click', function (e) {
+      if (navLinks.classList.contains('open') &&
+          !navLinks.contains(e.target) &&
+          !menuBtn.contains(e.target)) {
+        closeMenu();
+      }
+    });
+    // Fecha também ao apertar Esc
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMenu();
+    });
   </script>
 </body>
 </html>
